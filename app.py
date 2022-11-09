@@ -28,19 +28,19 @@ def home():
     return jsonify(flag='success', info=get_server_info())
 
 
-mongo_host = '192.168.31.204'
 mongo_port = 27017
+mongo_host = 'localhost' # '192.168.31.204'
 mongo_user = 'mongoadmin'
 mongo_pswd = 'huawei@P30'
 if Path('/.dockerenv').exists():
-    mongo_host = 'mongdb-0.mongodb' # os.getenv('MONGODB_NAME')
+    mongo_host = 'mongodb-0.mongodb' # os.getenv('MONGODB_NAME')
     mongo_port = 27017 # os.getenv('MONGODB_PORT')
 host_url = f'mongodb://{mongo_host}:{mongo_port}'
 
 
 @app.route('/user/add')
 def user_add():
-    client = MongoClient(host=host_url, username=mongo_user, password=mongo_pswd)
+    client = MongoClient(host=host_url)
     test_db = client['test']
     n = test_db['user'].count_documents({})
     n = n + 1
