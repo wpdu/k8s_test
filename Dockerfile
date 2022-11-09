@@ -12,3 +12,5 @@ RUN pip install gunicorn gevent
 CMD ["gunicorn", "app:app", "-c", "./gunicorn/config.py"]
 
 # docker build -t web_server:v1 .
+# git tag -a release-v1 -m "some thing"     创建固定格式的tag
+# git push origin release-v1                推送tag到仓库，出发阿里docker仓库自动构建
